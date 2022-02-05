@@ -16,4 +16,6 @@ public class Employee {
     private LocalDate dateOfJoining;
     private Integer yearsOfExperience;
     private String bio;
+    private Address currentAddress;
+    private Address permanentAddress;
 }

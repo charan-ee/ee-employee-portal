@@ -38,11 +38,13 @@ public class EmployeeController {
     }
 
     @PutMapping(value = "/{Id}")
-    public Employee updateEmployee(@PathVariable(name = "id") Long id, @RequestBody Employee employee){
-        return null;
+    public Employee updateEmployee(@PathVariable(name = "Id") Long Id, @RequestBody Employee employee){
+        employee.setEmployeeId(Id);
+        return employeeRepository.updateEmployee(employee);
     }
 
-    public void deleteEmployee(Long Id){
-
+    @DeleteMapping(value = "/{Id}")
+    public void deleteEmployee(@PathVariable(name = "Id") Long Id){
+        employeeRepository.deleteEmployee(Id);
     }
 }
