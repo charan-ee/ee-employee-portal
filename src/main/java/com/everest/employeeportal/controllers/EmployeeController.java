@@ -2,7 +2,7 @@ package com.everest.employeeportal.controllers;
 
 
 import com.everest.employeeportal.entities.Employee;
-import com.everest.employeeportal.repositories.EmployeeRepository;
+import com.everest.employeeportal.repositories.EmployeeRepositoryInMemory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("v1/api/employees")
 public class EmployeeController {
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeRepositoryInMemory employeeRepository;
 
     @GetMapping(value = "")
     public List<Employee> getEmployees(){

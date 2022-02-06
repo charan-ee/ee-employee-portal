@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
-public class EmployeeRepository {
+public class EmployeeRepositoryInMemory {
     private AtomicLong NEXT_ID = new AtomicLong(1);
     private Map<Long, Employee> EMPLOYEES = new HashMap<>();
 
