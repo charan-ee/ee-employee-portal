@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Repository
+//@Repository
 public class EmployeeRepositoryInMemory {
     private AtomicLong NEXT_ID = new AtomicLong(1);
     private Map<Long, Employee> EMPLOYEES = new HashMap<>();
@@ -24,16 +24,16 @@ public class EmployeeRepositoryInMemory {
     }
 
     public Employee createEmployee(Employee employee) {
-        employee.setEmployeeId(NEXT_ID.getAndIncrement());
-        EMPLOYEES.put(employee.getEmployeeId(), employee);
+        employee.setId(NEXT_ID.getAndIncrement());
+        EMPLOYEES.put(employee.getId(), employee);
         return employee;
     }
 
     public Employee updateEmployee(Employee employee) {
-        if (!EMPLOYEES.containsKey(employee.getEmployeeId())) {
+        if (!EMPLOYEES.containsKey(employee.getId())) {
             throw new EmployeeNotFoundException("Id doesn't exist");
         }
-        EMPLOYEES.put(employee.getEmployeeId(), employee);
+        EMPLOYEES.put(employee.getId(), employee);
         return employee;
     }
 
