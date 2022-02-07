@@ -18,7 +18,7 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     public Collection<Employee> getAllEmployees(){
-        return employeeRepository.findAll();
+        return employeeRepository.findByOrderByIdAsc();
     }
 
     public Employee getEmployeeById(Long Id){
@@ -29,5 +29,18 @@ public class EmployeeService {
     @Transactional
     public Employee addEmployee(Employee employee) throws EmployeeNotFoundException{
         return employeeRepository.save(employee);
+    }
+
+    @Transactional
+    public Employee updateEmployee(Employee employee){
+        return employeeRepository.save(employee);
+    }
+
+    public void removeEmployee(Long Id){
+        if(employeeRepository.existsById(Id)){
+            employeeRepository.deleteById(Id);
+        }else{
+            throw new EmployeeNotFoundException("Employee not found");
+        }
     }
 }

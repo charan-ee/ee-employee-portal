@@ -36,4 +36,16 @@ public class EmployeeController {
         final Employee savedEmployee = employeeService.addEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployee);
     }
+
+    @PutMapping(value = "/{Id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable(name = "Id") Long Id, @RequestBody Employee employee){
+        employee.setId(Id);
+        return ResponseEntity.status(HttpStatus.OK)
+                            .body(employeeService.updateEmployee(employee));
+    }
+
+    @DeleteMapping(value = "/{Id}")
+    public void deleteEmployee(@PathVariable(name = "Id") Long Id){
+        employeeService.removeEmployee(Id);
+    }
 }
