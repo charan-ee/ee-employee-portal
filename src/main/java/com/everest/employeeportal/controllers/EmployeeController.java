@@ -21,6 +21,11 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
+    @GetMapping(params = "sort")
+    public Collection<Employee> getEmployeesSortedByName(@RequestParam(name = "sort") String paramName){
+        return employeeService.getEmployeesBySort(paramName);
+    }
+
     @GetMapping(value = "/{Id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable(name = "Id") Long Id){
         final Employee employee = employeeService.getEmployeeById(Id);

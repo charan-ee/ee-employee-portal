@@ -9,4 +9,7 @@ import java.util.Collection;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Collection<Employee> findByOrderByIdAsc();
+    Collection<Employee> findByOrderByFirstNameAsc();
+    Collection<Employee> findByOrderByDateOfJoiningAsc();
+
 }

@@ -21,6 +21,14 @@ public class EmployeeService {
         return employeeRepository.findByOrderByIdAsc();
     }
 
+    public Collection<Employee> getEmployeesBySort(String param){
+        if(param.equals("name"))
+            return employeeRepository.findByOrderByFirstNameAsc();
+        if(param.toLowerCase().equals("doj"))
+            return employeeRepository.findByOrderByDateOfJoiningAsc();
+        return employeeRepository.findAll();
+    }
+
     public Employee getEmployeeById(Long Id){
         return employeeRepository.findById(Id)
                                 .orElseThrow(()-> new EmployeeNotFoundException("Employee not found"));
