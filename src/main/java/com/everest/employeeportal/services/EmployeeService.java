@@ -34,6 +34,10 @@ public class EmployeeService {
                                 .orElseThrow(()-> new EmployeeNotFoundException("Employee not found"));
     }
 
+    public Collection<Employee> getEmployeeByName(String name) throws EmployeeNotFoundException {
+        return employeeRepository.findByFirstNameStartingWith(name);
+    }
+
     @Transactional
     public Employee addEmployee(Employee employee) throws EmployeeNotFoundException{
         return employeeRepository.save(employee);

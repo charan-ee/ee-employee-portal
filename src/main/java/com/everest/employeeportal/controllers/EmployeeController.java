@@ -36,6 +36,11 @@ public class EmployeeController {
         }
     }
 
+    @GetMapping(value = "/search")
+    public Collection<Employee> searchEmployee(@RequestParam(name = "name") String name){
+        return employeeService.getEmployeeByName(name);
+    }
+
     @PostMapping(value = "")
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
         final Employee savedEmployee = employeeService.addEmployee(employee);
