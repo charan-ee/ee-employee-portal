@@ -3,17 +3,16 @@ package com.everest.employeeportal.services;
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.repositories.EmployeeRepository;
-import lombok.Data;
-import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Collection;
-import java.util.List;
 
-@Component
-@Data
+@Transactional
 @Service
+@RequiredArgsConstructor
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
@@ -23,15 +22,13 @@ public class EmployeeService {
 
     public Employee getEmployeeById(Long Id){
         return employeeRepository.findById(Id)
-                                .orElseThrow(()-> new EmployeeNotFoundException("Employee not found"));
+                                .orElseThrow(()-> new EmployeeNotFoundException("Employee with id:" +Id+" not found"));
     }
 
-    @Transactional
     public Employee addEmployee(Employee employee) throws EmployeeNotFoundException{
         return employeeRepository.save(employee);
     }
 
-    @Transactional
     public Employee updateEmployee(Employee employee){
         return employeeRepository.save(employee);
     }
