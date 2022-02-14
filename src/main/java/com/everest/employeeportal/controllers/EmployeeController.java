@@ -17,13 +17,11 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping(value = "")
-    public Collection<Employee> getEmployees(){
+    public Collection<Employee> getEmployees(@RequestParam(name = "sort", required = false) String sortParam){
+        if(sortParam != null){
+            return employeeService.getEmployeesBySort(sortParam);
+        }
         return employeeService.getAllEmployees();
-    }
-
-    @GetMapping(params = "sort")
-    public Collection<Employee> getEmployeesSortedByName(@RequestParam(name = "sort") String paramName){
-        return employeeService.getEmployeesBySort(paramName);
     }
 
     @GetMapping(value = "/{Id}")
