@@ -1,13 +1,12 @@
 package com.everest.employeeportal.entities;
 
-import lombok.Data;
-
-
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -42,6 +41,13 @@ public class Employee {
     @Column(name = "Bio")
     private String bio;
 
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Address> currentAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "current_address_id")
+    private Address currentAddress;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "permanent_address_id")
+    private Address permanentAddress;
+
+
 }
