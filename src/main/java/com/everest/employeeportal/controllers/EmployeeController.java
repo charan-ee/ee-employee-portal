@@ -4,10 +4,12 @@ package com.everest.employeeportal.controllers;
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,11 +18,10 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping(value = "")
-    public Collection<Employee> getEmployees(@RequestParam(name = "sort", required = false) String sortParam){
-        if(sortParam != null){
-            return employeeService.getEmployeesBySort(sortParam);
-        }
-        return employeeService.getAllEmployees();
+    public Page<Employee> getEmployees(@RequestParam(name = "sort", defaultValue = "Id", required = false) String sortParam,
+                                       @RequestParam(defaultValue = "0") Integer page,
+                                       @RequestParam(defaultValue = "2") Integer pageSize){
+        return employeeService.getAllEmployees(page, pageSize, sortParam);
     }
 
     @GetMapping(value = "/{Id}")

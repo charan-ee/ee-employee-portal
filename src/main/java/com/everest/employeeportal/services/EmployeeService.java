@@ -4,9 +4,14 @@ import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
+import java.util.List;
+
 import org.springframework.data.domain.Sort;
 
 @Transactional
@@ -15,9 +20,10 @@ import org.springframework.data.domain.Sort;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public Collection<Employee> getAllEmployees(){
-        Sort sort = Sort.by(Sort.Direction.ASC, "Id");
-        return employeeRepository.findAll(sort);
+    public Page<Employee> getAllEmployees(Integer pageNo, Integer pageSize, String sortParam){
+        Sort sort = Sort.by(Sort.Direction.ASC, sortParam);
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+        return employeeRepository.findAll(pageable);
     }
 
     public Collection<Employee> getEmployeesBySort(String param){
