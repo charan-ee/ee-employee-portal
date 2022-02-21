@@ -24,26 +24,29 @@ public class Employee {
     private String password;
 
     @Column(name = "personalEmail")
-    private String personalEmail;
+    private String personalEmailId;
 
     @Column(name = "everestEmail")
-    private String everestEmail;
+    private String everestEmailId;
 
     @Column(name = "DOB")
-    private LocalDate dateOfBirth;
+    private LocalDate dob;
 
     @Column(name = "DOJ")
-    private LocalDate dateOfJoining;
+    private LocalDate doj;
+
+    @Column(name = "Designation")
+    private String designation;
 
     @Column(name = "Experience")
-    private Integer yearsOfExperience;
+    private Integer experienceInYears;
 
     @Column(name = "Bio")
     private String bio;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "current_address_id")
-    private Address currentAddress;
+    private Address presentAddress;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "permanent_address_id")
