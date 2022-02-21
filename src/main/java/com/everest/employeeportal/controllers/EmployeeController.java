@@ -2,6 +2,7 @@ package com.everest.employeeportal.controllers;
 
 
 import com.everest.employeeportal.entities.Employee;
+import com.everest.employeeportal.models.EmployeeResponse;
 import com.everest.employeeportal.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,15 +14,15 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("v1/api/employees")
+@RequestMapping("/api/employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping(value = "")
-    public Page<Employee> getEmployees(@RequestParam(name = "sort", defaultValue = "Id", required = false) String sortParam,
-                                       @RequestParam(defaultValue = "0") Integer page,
-                                       @RequestParam(defaultValue = "2") Integer pageSize){
-        return employeeService.getAllEmployees(page, pageSize, sortParam);
+    public EmployeeResponse getEmployees(@RequestParam(name = "sort", defaultValue = "Id", required = false) String sortParam,
+                                         @RequestParam(defaultValue = "0") Integer page,
+                                         @RequestParam(defaultValue = "2") Integer pageSize){
+        return employeeService.getAllEmployees((page-1), pageSize, sortParam);
     }
 
     @GetMapping(value = "/{Id}")

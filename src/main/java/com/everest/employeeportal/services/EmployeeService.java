@@ -2,6 +2,7 @@ package com.everest.employeeportal.services;
 
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
+import com.everest.employeeportal.models.EmployeeResponse;
 import com.everest.employeeportal.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,18 +21,10 @@ import org.springframework.data.domain.Sort;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public Page<Employee> getAllEmployees(Integer pageNo, Integer pageSize, String sortParam){
+    public EmployeeResponse getAllEmployees(Integer pageNo, Integer pageSize, String sortParam){
         Sort sort = Sort.by(Sort.Direction.ASC, sortParam);
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
-        return employeeRepository.findAll(pageable);
-    }
-
-    public Collection<Employee> getEmployeesBySort(String param){
-        if(param.equals("name"))
-            return employeeRepository.findAll(Sort.by("firstName","lastName"));
-        if(param.equalsIgnoreCase("doj"))
-            return employeeRepository.findAll(Sort.by("dateOfJoining"));
-        return employeeRepository.findAll();
+        return new EmployeeResponse(employeeRepository.findAll(pageable));
     }
 
     public Employee getEmployeeById(Long Id){
