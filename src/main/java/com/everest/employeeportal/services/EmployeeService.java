@@ -29,11 +29,12 @@ public class EmployeeService {
 
     public Employee getEmployeeById(Long Id){
         return employeeRepository.findById(Id)
-                                .orElseThrow(()-> new EmployeeNotFoundException("Employee not found"));
+                                .orElseThrow(()-> new EmployeeNotFoundException("Employee with Id:" + Id + " not found"));
     }
 
-    public Collection<Employee> getEmployeeByName(String name) throws EmployeeNotFoundException {
-        return employeeRepository.findByFirstNameStartingWith(name);
+    public EmployeeResponse getEmployeeByName(String name, Integer pageNo, Integer pageSize) throws EmployeeNotFoundException {
+        Pageable employeePage = PageRequest.of(pageNo, pageSize);
+        return new EmployeeResponse(employeeRepository.findByFirstNameStartingWith(name, employeePage));
     }
 
     public Employee addEmployee(Employee employee) throws EmployeeNotFoundException{

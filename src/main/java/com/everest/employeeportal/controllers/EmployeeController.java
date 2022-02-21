@@ -20,7 +20,7 @@ public class EmployeeController {
 
     @GetMapping(value = "")
     public EmployeeResponse getEmployees(@RequestParam(name = "sort", defaultValue = "Id", required = false) String sortParam,
-                                         @RequestParam(defaultValue = "0") Integer page,
+                                         @RequestParam(defaultValue = "1") Integer page,
                                          @RequestParam(defaultValue = "2") Integer pageSize){
         return employeeService.getAllEmployees((page-1), pageSize, sortParam);
     }
@@ -36,8 +36,9 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/search")
-    public Collection<Employee> searchEmployee(@RequestParam(name = "name") String name){
-        return employeeService.getEmployeeByName(name);
+    public EmployeeResponse searchEmployee(@RequestParam String query, @RequestParam(defaultValue = "1") Integer page,
+                                            @RequestParam(defaultValue = "2") Integer pageSize){
+        return employeeService.getEmployeeByName(query, page-1, pageSize);
     }
 
     @PostMapping(value = "")
