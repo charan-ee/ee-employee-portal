@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 
@@ -42,14 +43,17 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Employee employee){
-        return employeeRepository.save(employee);
+        Long employeeId = employee.getId();
+        Employee employeeToUpdate = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee with Id:" + employeeId + " not found"));
+        return employeeRepository.save(employeeToUpdate);
     }
 
     public void removeEmployee(Long Id){
         if(employeeRepository.existsById(Id)){
             employeeRepository.deleteById(Id);
         }else{
-            throw new EmployeeNotFoundException("Employee not found");
+            throw new EmployeeNotFoundException("Employee with Id:" + Id + " not found");
         }
     }
 }
