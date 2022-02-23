@@ -1,5 +1,6 @@
 package com.everest.employeeportal.advices;
 
+import com.everest.employeeportal.exceptions.CreateEmployeeException;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,5 +22,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleEmployeeNotFoundException(EmployeeNotFoundException e){
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    public ResponseEntity<ErrorResponse> handleCreateEmployeeException(CreateEmployeeException e){
+        ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 }

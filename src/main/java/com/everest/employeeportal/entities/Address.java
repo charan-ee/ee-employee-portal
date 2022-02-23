@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "address")
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Address can't be empty")
@@ -27,6 +27,5 @@ public class Address {
 
     private String country;
 
-    @NotBlank
     private Long zipcode;
 }
