@@ -3,11 +3,10 @@ package com.everest.employeeportal.services;
 import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.repositories.EmployeeRepository;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Collection;
 
 @Transactional
@@ -17,7 +16,16 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     public Collection<Employee> getAllEmployees(){
-        return employeeRepository.findByOrderByIdAsc();
+        Sort sort = Sort.by(Sort.Direction.ASC, "Id");
+        return employeeRepository.findAll(sort);
+    }
+
+    public Collection<Employee> getEmployeesBySort(String param){
+        if(param.equals("name"))
+            return employeeRepository.findAll(Sort.by("firstName","lastName"));
+        if(param.equalsIgnoreCase("doj"))
+            return employeeRepository.findAll(Sort.by("dateOfJoining"));
+        return employeeRepository.findAll();
     }
 
     public Employee getEmployeeById(Long Id){

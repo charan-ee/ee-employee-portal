@@ -17,7 +17,10 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping(value = "")
-    public Collection<Employee> getEmployees(){
+    public Collection<Employee> getEmployees(@RequestParam(name = "sort", required = false) String sortParam){
+        if(sortParam != null){
+            return employeeService.getEmployeesBySort(sortParam);
+        }
         return employeeService.getAllEmployees();
     }
 

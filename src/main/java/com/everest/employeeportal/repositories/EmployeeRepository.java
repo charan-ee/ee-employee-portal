@@ -8,5 +8,5 @@ import java.util.Collection;
 
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    Collection<Employee> findByOrderByIdAsc();
+
 }
