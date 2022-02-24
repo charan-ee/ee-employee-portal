@@ -1,10 +1,12 @@
 package com.everest.employeeportal.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "address")
 public class Address {
@@ -18,8 +20,4 @@ public class Address {
     private String state;
     private Long zipcode;
     private String country;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="employee_id", nullable = false)
-    private Employee employee;
 }
