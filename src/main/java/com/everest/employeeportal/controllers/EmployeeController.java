@@ -2,25 +2,29 @@ package com.everest.employeeportal.controllers;
 
 
 import com.everest.employeeportal.entities.Employee;
+import com.everest.employeeportal.models.EmployeeResponse;
 import com.everest.employeeportal.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("v1/api/employees")
+@RequestMapping("/api/employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping(value = "")
-    public Collection<Employee> getEmployees(@RequestParam(name = "sort", required = false) String sortParam){
-        if(sortParam != null){
-            return employeeService.getEmployeesBySort(sortParam);
-        }
-        return employeeService.getAllEmployees();
+    public EmployeeResponse getEmployees(@RequestParam(name = "sort", defaultValue = "Id", required = false) String sortParam,
+                                         @RequestParam(defaultValue = "1") Integer page,
+                                         @RequestParam(defaultValue = "2") Integer pageSize){
+        return employeeService.getAllEmployees((page-1), pageSize, sortParam);
     }
 
     @GetMapping(value = "/{Id}")
@@ -34,12 +38,13 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/search")
-    public Collection<Employee> searchEmployee(@RequestParam(name = "name") String name){
-        return employeeService.getEmployeeByName(name);
+    public EmployeeResponse searchEmployee(@RequestParam String query, @RequestParam(defaultValue = "1") Integer page,
+                                            @RequestParam(defaultValue = "2") Integer pageSize){
+        return employeeService.getEmployeeByName(query, page-1, pageSize);
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee){
         final Employee savedEmployee = employeeService.addEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployee);
     }
