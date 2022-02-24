@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 
 @RestController
@@ -32,6 +31,11 @@ public class EmployeeController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @GetMapping(value = "/search")
+    public Collection<Employee> searchEmployee(@RequestParam(name = "name") String name){
+        return employeeService.getEmployeeByName(name);
     }
 
     @PostMapping(value = "")

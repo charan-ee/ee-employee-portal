@@ -4,10 +4,10 @@ import com.everest.employeeportal.entities.Employee;
 import com.everest.employeeportal.exceptions.EmployeeNotFoundException;
 import com.everest.employeeportal.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 import java.util.Collection;
+import org.springframework.data.domain.Sort;
 
 @Transactional
 @Service
@@ -31,6 +31,10 @@ public class EmployeeService {
     public Employee getEmployeeById(Long Id){
         return employeeRepository.findById(Id)
                                 .orElseThrow(()-> new EmployeeNotFoundException("Employee with id:" +Id+" not found"));
+    }
+
+    public Collection<Employee> getEmployeeByName(String name) throws EmployeeNotFoundException {
+        return employeeRepository.findByFirstNameStartingWith(name);
     }
 
     public Employee addEmployee(Employee employee) throws EmployeeNotFoundException{
