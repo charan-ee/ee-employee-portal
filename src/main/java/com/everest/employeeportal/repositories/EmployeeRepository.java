@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
-@Repository
+
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Collection<Employee> findByFirstNameStartingWith(String name);
 
