@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
-@Repository
+
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Page<Employee> findByFirstNameStartingWith(String name, Pageable pageable);
 
