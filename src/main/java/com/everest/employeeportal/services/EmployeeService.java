@@ -30,7 +30,7 @@ public class EmployeeService {
 
     public Employee getEmployeeById(Long Id){
         return employeeRepository.findById(Id)
-                                .orElseThrow(()-> new EmployeeNotFoundException("Employee not found"));
+                                .orElseThrow(()-> new EmployeeNotFoundException("Employee with id:" +Id+" not found"));
     }
 
     public Employee addEmployee(Employee employee) throws EmployeeNotFoundException{
