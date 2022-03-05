@@ -13,4 +13,5 @@ import java.util.Collection;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Page<Employee> findByFirstNameStartingWith(String name, Pageable pageable);
 
+    Employee findByEverestEmailId(String everestEmailId);
 }
