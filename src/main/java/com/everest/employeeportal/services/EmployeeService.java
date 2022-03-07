@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
@@ -22,6 +23,7 @@ import org.springframework.data.domain.Sort;
 @RequiredArgsConstructor
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
     public EmployeeResponse getAllEmployees(Integer pageNo, Integer pageSize, String sortParam){
@@ -47,6 +49,7 @@ public class EmployeeService {
         if(existingEmployee != null){
             throw new CreateEmployeeException("Employee with email:" + employee.getEverestEmailId() + " already exists");
         }
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         return employeeRepository.save(employee);
     }
 
@@ -54,6 +57,7 @@ public class EmployeeService {
         Long employeeId = employee.getId();
         Employee employeeToUpdate = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee with Id:" + employeeId + " not found"));
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         return employeeRepository.save(employee);
     }
 

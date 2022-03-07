@@ -2,15 +2,15 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <div>
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <div class="container py-5 h-100">
             <div th:if="${param.error}">
                 <div class="alert alert-danger">Invalid Email and Password.</div>
             </div>
@@ -21,7 +21,7 @@
                 <div class="card-header">
                     <h3 >Login Form</h3>
                 </div>
-                <div class="card-body">
+                <div class="col-md-20 col-lg-10 col-xl-5 offset-xl-1">
                     <form id="loginForm" method="post" th:action="@{/login}" class="form-horizontal" role="form"
                           cssStyle="width: 800px; margin: 0 auto;">
                         <div class="form-group">
