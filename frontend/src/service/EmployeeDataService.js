@@ -7,12 +7,16 @@ class EmployeeDataService {
     return axios.get(`${API_BASE_URL}/api/employees`);
   }
 
+  fetchEmployeeById = (id) => {
+    return axios.get(`${API_BASE_URL}/api/employees/${id}`);
+  }
+
   createEmployee = (employee) => {
     return axios.post(`${API_BASE_URL}/api/employees`,employee);
   }
 
-  updateEmployee = (id, firstName, password, everestEmailId) => {
-    return axios.put(`${API_BASE_URL}/api/employees/${id}`);
+  updateEmployee = (id, employee) => {
+    return axios.put(`${API_BASE_URL}/api/employees/${id}`, employee);
   }
 
   deleteEmployee = (id) => {

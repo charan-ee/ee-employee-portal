@@ -1,6 +1,7 @@
 import EmployeeListComponent from "./component/EmployeeListComponent";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import EmployeeComponent from "./component/AddEmployeeComponent";
+import AddEmployeeComponent from "./component/AddEmployeeComponent";
+import EditEmployeeComponent from "./component/EditEmployeeComponent";
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
                   <h1>Employee Portal</h1>
                   <Switch>
                       <Route path="/employees" exact component={EmployeeListComponent} />
-                      <Route path="/employee/new" component={EmployeeComponent} />
+                      <Route path="/employee/new" component={AddEmployeeComponent} />
+                      <Route path="/employee/update/:id" component={EditEmployeeComponent} />
                   </Switch>
               </div>
           </Router>

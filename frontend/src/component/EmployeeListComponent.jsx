@@ -32,6 +32,10 @@ const  EmployeeListComponent = () => {
         history.push('/employee/new')
     }
 
+    function handleUpdateEmployee(id) {
+        history.push(`/employee/update/${id}`)
+    }
+
     return (
         <div>
             <h4>Employee List</h4>
@@ -54,7 +58,7 @@ const  EmployeeListComponent = () => {
                             <td>{emp.firstName} {emp.lastName}</td>
                             <td>{emp.everestEmailId}</td>
                             <td>
-                                <button className="btn btn-success mr-1" onClick={() => this.editUser(emp.id)}>Edit</button>
+                                <button className="btn btn-success mr-1" onClick={() => handleUpdateEmployee(emp.id)}>Edit</button>
                                 <button className="btn btn-danger mr-1" onClick={() => deleteEmployee(emp.id)}>Delete</button>
                             </td>
                         </tr>
