@@ -6,6 +6,19 @@ class EmployeeDataService {
   fetchEmployees = () => {
     return axios.get(`${API_BASE_URL}/api/employees`);
   }
+
+  createEmployee = (employee) => {
+    return axios.post(`${API_BASE_URL}/api/employees`,employee);
+  }
+
+  updateEmployee = (id, firstName, password, everestEmailId) => {
+    return axios.put(`${API_BASE_URL}/api/employees/${id}`);
+  }
+
+  deleteEmployee = (id) => {
+    return axios.delete(`${API_BASE_URL}/api/employees/${id}`);
+  }
+
 }
 
 export default new EmployeeDataService();
