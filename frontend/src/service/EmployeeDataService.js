@@ -11,6 +11,10 @@ class EmployeeDataService {
     return axios.get(`${API_BASE_URL}/api/employees/${id}`);
   }
 
+  searchEmployeeByName = (name) => {
+    return axios.get(`${API_BASE_URL}/api/employees/search?query=${name}`,name)
+  }
+
   createEmployee = (employee) => {
     return axios.post(`${API_BASE_URL}/api/employees`,employee);
   }
@@ -26,4 +30,3 @@ class EmployeeDataService {
 }
 
 export default new EmployeeDataService();
-   
