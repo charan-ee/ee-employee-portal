@@ -20,17 +20,17 @@ public class Employee {
     private String firstName;
 
     @Column(name = "lastName")
-    @NotBlank(message = "Last Name can't be empty")
+//    @NotBlank(message = "Last Name can't be empty")
     private String lastName;
 
     @Column(name = "password")
-    @NotBlank
+//    @NotBlank
     @Size(min = 5)
     private String password;
 
     @Email
     @Column(name = "personalEmail")
-    @NotBlank(message = "Personal Email can't be empty")
+//    @NotBlank(message = "Personal Email can't be empty")
     private String personalEmailId;
 
     @Column(name = "everestEmail")
