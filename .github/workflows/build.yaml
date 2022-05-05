@@ -15,6 +15,8 @@ jobs:
         image: postgres
         env:
           POSTGRES_PASSWORD: 1234
+          POSTGRES_USER: postgres
+          POSTGRES_DB: everest
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
