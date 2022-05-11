@@ -54,11 +54,11 @@ public class Employee {
     private String bio;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "current_address_id")
+    @JoinColumn(name = "currentAddress")
     private Address presentAddress;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "permanent_address_id")
+    @JoinColumn(name = "permanentAddress")
     private Address permanentAddress;
 
 
