@@ -1,11 +1,3 @@
-variable "aws_access_key" {
-  description = "AWS Access key ID to login"
-}
-
-variable "aws_secret_key" {
-  description = "AWS Secret key to connect with EC2 Instance"
-}
-
 variable "aws_region" {
   description = "The AWS region to create things in."
   default     = "ap-south-1"
