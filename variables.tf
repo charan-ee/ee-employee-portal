@@ -1,11 +1,9 @@
 variable "aws_access_key" {
   description = "AWS Access key ID to login"
-  default     = "AKIA3EPQWKAO6FIJH4OE"
 }
 
 variable "aws_secret_key" {
   description = "AWS Secret key to connect with EC2 Instance"
-  default     = "ke/vO0LBGbOO8cPmq874OVDR5ntksrlkyMUxho2S"
 }
 
 variable "aws_region" {
