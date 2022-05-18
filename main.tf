@@ -2,14 +2,20 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "= 3.74.2"
+      version = "~> 3.0"
     }
   }
   required_version = ">= 1.0.4"
+  cloud {
+    organization = "everest-app"
+    workspaces {
+      name = "ee-employee-portal"
+    }
+  }
 }
 
 provider "aws" {
-  version = "~> 3.0"
+  version = "= 3.74.2"
   region = var.aws_region
 }
 
