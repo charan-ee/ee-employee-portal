@@ -9,7 +9,7 @@ terraform {
   cloud {
     organization = "everest-app"
     workspaces {
-      name = "ee-employee-portal"
+      name = "employee-app"
     }
   }
 }
@@ -26,13 +26,16 @@ resource "aws_instance" "employee_app_server" {
   vpc_security_group_ids = [aws_security_group.main.id]
 
   tags = {
-    Name = "EC2-Terraform"
+    Name = "employee_app_server"
   }
   connection {
-    type    = "ssh"
-    host    = self.public_ip
-    user    = "ec2-user"
-    timeout = "4m"
+    type        = "ssh"
+    host        = self.public_ip
+    port        = 22
+    user        = "ec2-user"
+    private_key = file("./keys/aws_ssh_key")
+    timeout     = "4m"
+    agent       = false
   }
 }
 
@@ -93,5 +96,9 @@ resource "aws_security_group" "main" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "ec2-deployer-key-pair"
-  public_key = var.ssh_key_public
+  public_key = file("./keys/aws_ssh_key.pub")
+}
+
+output "public_ip" {
+  value = aws_instance.employee_app_server.public_ip
 }
