@@ -94,6 +94,11 @@ resource "aws_security_group" "main" {
   ]
 }
 
+resource "aws_eip" "ec2-user" {
+  vpc      = true
+  instance = aws_instance.employee_app_server.id
+}
+
 resource "aws_key_pair" "deployer" {
   key_name   = "ec2-deployer-key-pair"
   public_key = file("./keys/aws_ssh_key.pub")
