@@ -32,7 +32,7 @@ resource "aws_instance" "employee_app_server" {
     host        = self.public_ip
     port        = 22
     user        = "ec2-user"
-    private_key = file("./keys/aws_ssh_key")
+    private_key = file("keys/aws_ssh_key")
     timeout     = "4m"
     agent       = false
   }
@@ -100,7 +100,7 @@ resource "aws_eip" "ec2-user" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "ec2-deployer-key-pair"
-  public_key = file("./keys/aws_ssh_key.pub")
+  public_key = file("keys/aws_ssh_key.pub")
 }
 
 output "public_ip" {
